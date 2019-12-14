@@ -15,13 +15,10 @@ use Illuminate\Http\Request;
 
 //Public Routes
 Route::post('login', 'Api\AuthController@login');
+Route::post('refresh', 'Api\AuthController@refresh');
 
 //Restrict Routes
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Api\AuthController@logout');
     Route::apiResource('user', 'UserController');
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
